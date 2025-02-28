@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const fs = require("fs");
 const path = require("path");
+const cors = require("cors");
 
 let countriesCache = null;
 let countriesListCache = null;
@@ -13,6 +14,12 @@ const dataFilePath = path.join(
   "countries_states_cities.json"
 );
 
+app.use(
+  cors({
+    origin: "*",
+    methods: ["GET"],
+  })
+);
 app.use(express.json());
 
 app.get("/", (req, res) => res.json({ message: "Country Data API" }));
